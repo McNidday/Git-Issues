@@ -62,6 +62,5 @@
     "postcss-preset-env": "^6.7.0",
     "react-devtools": "^4.10.1",
     "rimraf": "^3.0.2"
-  },
-  "proxy": "https://mkniddaygitissuesbackend.herokuapp.com"
+  }
 }

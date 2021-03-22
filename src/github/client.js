@@ -1,33 +1,34 @@
 import axios from 'axios'
 class GitClient {
     constructor() {
+        this.url = 'https://mkniddaygitissuesbackend.herokuapp.com'
         this.appendeClientToken()
     }
 
     appendeClientToken() {
-        const access_token = localStorage.getItem('access_token')
+        const access_token = localStorage.getItem(this.url + 'access_token')
         if (access_token) this.access_token = access_token
     }
 
     async getAuthUrl() {
-        const response = await axios.get('/auth_url')
+        const response = await axios.get(this.url + '/auth_url')
         return response.data
     }
 
     async login(code) {
-        const response = await axios.get(`/user/login?code=${code}`)
+        const response = await axios.get(this.url + `/user/login?code=${code}`)
         // Set the access token to class
         this.access_token = response.data
         return response.data
     }
 
     async repos() {
-        const response = await axios.get(`/user/repos?access_token=${this.access_token}`)
+        const response = await axios.get(this.url + `/user/repos?access_token=${this.access_token}`)
         return response.data
     }
 
     async info() {
-        const response = await axios.get(`/user/info?access_token=${this.access_token}`)
+        const response = await axios.get(this.url + `/user/info?access_token=${this.access_token}`)
         return response.data
     }
 
@@ -35,7 +36,7 @@ class GitClient {
         if (!page) page = 1
         const response = await axios({
             method: 'post',
-            url: `/user/issues?access_token=${this.access_token}&repo=${repo}`,
+            url: this.url + `/user/issues?access_token=${this.access_token}&repo=${repo}`,
             data: { ...config, page: page }
         })
         return response.data
@@ -44,7 +45,7 @@ class GitClient {
     async search(q) {
         const response = await axios({
             method: 'post',
-            url: `/search/issues?access_token=${this.access_token}`,
+            url: this.url + `/search/issues?access_token=${this.access_token}`,
             data: { q: q }
         })
         return response.data
@@ -53,7 +54,7 @@ class GitClient {
     async repo(values) {
         const response = await axios({
             method: 'post',
-            url: `/repo`,
+            url: this.url + `/repo`,
             data: { values: values }
         })
         return response.data
