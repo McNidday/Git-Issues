@@ -16,7 +16,7 @@ function SignIn(props) {
                 <div className={classes.linksContainer}>
                     <a href={props.auth_url} className={classes.gitLogo}><span>GitHub SignIn</span> <img src="/github-logo.png"></img></a>
                     <p>or</p>
-                    <a href='/issues' className={classes.guestLink}><span>Guest SignIn</span> <img src="/guest.png"></img></a>
+                    <a href='/issues?guest=true' className={classes.guestLink}><span>Guest SignIn</span> <img src="/guest.png"></img></a>
                 </div>
             </div>
         </div >

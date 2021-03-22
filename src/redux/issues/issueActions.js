@@ -13,20 +13,21 @@ function getIssuesLoading() {
     }
 }
 
-function getIssuesFailure(error) {
+function getIssuesFailure(error, state) {
     return {
         type: GET_ISSUES_FAILURE,
-        payload: error
+        payload: { error, state }
     }
 }
 
 export function getIssues(client, config, repo) {
     return function (dispatch) {
+        // console.log(client, config, repo)
         dispatch(getIssuesLoading())
         client.issues(repo, config).then(issues => {
             dispatch(getIssuesSuccess(issues, config.state, repo))
         }).catch(err => {
-            dispatch(getIssuesFailure(err.response.data))
+            dispatch(getIssuesFailure(err.response.data, config.state))
         })
     }
 }

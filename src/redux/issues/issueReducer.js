@@ -25,7 +25,8 @@ const issueReducer = (state = initialState, action) => {
             ...state,
             issues: [],
             loading: false,
-            error: action.payload
+            error: action.payload.error,
+            state: action.payload.state
         }
         case GET_ISSUES_LOADING: return {
             ...state,

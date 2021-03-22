@@ -10,6 +10,7 @@ function ReposContanerList(props) {
     const client = useContext(ClientContext)
     useEffect(() => {
         if (client) {
+            // console.log(client, 'ciemfkajlafnjafna')
             props.fetchRepos(client)
         }
     }, [client, location])

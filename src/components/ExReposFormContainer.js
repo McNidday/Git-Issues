@@ -11,7 +11,6 @@ function ExReposFormContainer(props) {
         e.preventDefault();
         const values = props.exKeeper + '/' + props.exRepoName
         props.fetchExternalRepo(client, values)
-
     }
     function handleExKeeperInput(e) {
         props.keeperInputAction(e.target.value)

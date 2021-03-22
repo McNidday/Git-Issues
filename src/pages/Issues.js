@@ -11,27 +11,14 @@ import TopNavContainer from '../components/TopNavContainer'
 function Issues(props) {
     useEffect(() => {
         const parsed = queryString.parse(window.location.search)
-        // Get token from local storage
-        const access_token = localStorage.getItem('access_token')
         // If the code exists and token does not exist then login to git
+        const access_token = localStorage.getItem('access_token')
         if (parsed.code && !access_token) {
             props.clientLogin(parsed.code)
+        } else {
+            props.createClient()
         }
     }, [])
-
-    useEffect(() => {
-        // Create client for logged in user
-        if (props.access_token) {
-            props.createClient()
-        } else {
-            // Get token from local storage
-            const access_token = localStorage.getItem('access_token')
-            // If no code and access token exists then create client
-            if (access_token) {
-                props.createClient()
-            }
-        }
-    }, [props.access_token])
 
     return (
         <ClientProvider value={props.client}>

@@ -36,7 +36,8 @@ const repoReducer = (state = initialState, action) => {
         }
         case FETCH_SAVED_PUBLIC_REPOS_SUCCESS: return {
             ...state,
-            exRepos: action.payload
+            exRepos: action.payload.exRepos,
+            defaultExRepo: action.payload.defaultExRepo
         }
         case KEEPER_NAME_INPUT_ACTION: return {
             ...state,

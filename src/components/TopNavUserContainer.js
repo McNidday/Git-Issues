@@ -16,6 +16,7 @@ function TopNavUserContainer(props) {
         props.logout()
         window.location.replace('/')
     }
+    // console.log(props.user)
     return (
         <React.Fragment>
             <li>

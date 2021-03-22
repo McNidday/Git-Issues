@@ -8,10 +8,10 @@ function getGitUrlSuccess(auth_url) {
     }
 }
 
-function clientLoginSuccess(token) {
+function clientLoginSuccess(token, client) {
     return {
         type: CLIENT_LOGIN_SUCCESS,
-        payload: token
+        payload: { token: token, client: client }
     }
 }
 
@@ -34,7 +34,7 @@ export function clientLogin(code) {
     return function (dispatch) {
         GitClient.login(code).then(token => {
             localStorage.setItem('access_token', token)
-            dispatch(clientLoginSuccess(token))
+            dispatch(clientLoginSuccess(token, GitClient))
         })
     }
 }

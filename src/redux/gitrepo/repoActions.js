@@ -14,10 +14,11 @@ function fetchGitReposFailure(err, cashedRepos, defaultRepo) {
     }
 }
 
-function fetchSavedPublicReposSuccess(exRepos) {
+function fetchSavedPublicReposSuccess(exRepos, defaultExRepo) {
+    // console.log(exRepos, defaultExRepo)
     return {
         type: FETCH_SAVED_PUBLIC_REPOS_SUCCESS,
-        payload: exRepos
+        payload: { exRepos: exRepos, defaultExRepo: defaultExRepo }
     }
 }
 
@@ -78,12 +79,13 @@ export function fetchGitRepos(client) {
     return function (dispatch) {
         dispatch(loadingGitRepos())
         client.repos().then(repos => {
+            if (!repos) return dispatch(fetchGitReposSuccess([], ''))
             // Store the fetched repos
             localStorage.setItem('repos', JSON.stringify(repos))
             dispatch(fetchGitReposSuccess(repos, repos[0].full_name))
         }).catch(err => {
             const cashedRepos = localStorage.getItem('repos');
-            dispatch(fetchGitReposFailure(err.message, cashedRepos && cashedRepos !== "undefined" ? JSON.parse(cashedRepos) : []), JSON.parse(cashedRepos)[0].full_name)
+            dispatch(fetchGitReposFailure(err.response.data, cashedRepos && cashedRepos !== "undefined" ? JSON.parse(cashedRepos) : []), cashedRepos && cashedRepos !== "undefined" ? JSON.parse(cashedRepos)[0].full_name : '')
         })
     }
 }
@@ -93,7 +95,7 @@ export function fetchSavedPublicRepos() {
         let exRepos = localStorage.getItem('exRepos')
         if (exRepos) exRepos = JSON.parse(exRepos)
         if (!exRepos) exRepos = []
-        dispatch(fetchSavedPublicReposSuccess(exRepos))
+        dispatch(fetchSavedPublicReposSuccess(exRepos, exRepos.length > 0 ? exRepos[0].full_name : ''))
     }
 }
 

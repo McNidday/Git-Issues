@@ -2,11 +2,12 @@ import axios from 'axios'
 class GitClient {
     constructor() {
         this.url = 'https://mkniddaygitissuesbackend.herokuapp.com'
+        // this.url = 'http://localhost:4000'
         this.appendeClientToken()
     }
 
     appendeClientToken() {
-        const access_token = localStorage.getItem(this.url + 'access_token')
+        const access_token = localStorage.getItem('access_token')
         if (access_token) this.access_token = access_token
     }
 

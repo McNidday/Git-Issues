@@ -162,6 +162,14 @@
 
         @media only screen and (max-width: 600px) {
             padding: 5px;
+
+            .error {
+                padding: 10px;
+            }
+
+            .noIssues {
+                padding: 10px;
+            }
         }
 
         .error {

@@ -14,6 +14,7 @@ function IssuesContainer(props) {
     const location = useLocation();
     // Get all the issues related to the logged in user
     useEffect(() => {
+        // console.log(client, props.defaultRepo, props.defaultExRepo, 'sssssssss')
         if (client && props.defaultRepo) {
             // Check if repo has been passed on top
             const parsed = queryString.parse(location.search)
@@ -237,7 +238,7 @@ function IssuesContainer(props) {
                     </ul>
                 </div>
                 <ul>
-                    {props.loading ? <li style={{ color: 'lime' }}>Loading Issues...</li> : ''}
+                    {props.loading ? <li style={{ color: 'lime', padding: "10px" }}>Loading Issues...</li> : ''}
                     {props.error ? <li className={classes.error}>{props.error}</li> : ''}
                     {props.issues.length < 1 && !props.error ? <li className={classes.noIssues}>No Isssues Found For This Repo</li> : ''}
                     {props.issues.map(issue => {
@@ -303,7 +304,8 @@ const mapStateToProps = state => {
         milestones: state.issue.milestones,
         assignee: state.issue.assignee,
         sort: state.issue.sort,
-        page: state.issue.page
+        page: state.issue.page,
+        defaultExRepo: state.repo.defaultExRepo
     }
 }
 

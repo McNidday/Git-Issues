@@ -20,7 +20,8 @@ const authReducer = (state = initialState, action) => {
         }
         case CLIENT_LOGIN_SUCCESS: return {
             ...state,
-            access_token: action.payload
+            access_token: action.payload.token,
+            client: action.payload.client
         }
         default: return state
     }
