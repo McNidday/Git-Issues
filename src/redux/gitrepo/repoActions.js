@@ -77,17 +77,13 @@ function fetchExternalRepoErrorRemove() {
 export function fetchGitRepos(client) {
     return function (dispatch) {
         dispatch(loadingGitRepos())
-        const ghme = client.me()
-        ghme.repos((err, repos) => {
-            if (err) {
-                const cashedRepos = localStorage.getItem('repos');
-                dispatch(fetchGitReposFailure(err.message, cashedRepos && cashedRepos !== "undefined" ? JSON.parse(cashedRepos) : []), JSON.parse(cashedRepos)[0].full_name)
-                return
-            }
-            // console.log('No error there bitch ass nigga!', repos);
+        client.repos().then(repos => {
             // Store the fetched repos
             localStorage.setItem('repos', JSON.stringify(repos))
             dispatch(fetchGitReposSuccess(repos, repos[0].full_name))
+        }).catch(err => {
+            const cashedRepos = localStorage.getItem('repos');
+            dispatch(fetchGitReposFailure(err.message, cashedRepos && cashedRepos !== "undefined" ? JSON.parse(cashedRepos) : []), JSON.parse(cashedRepos)[0].full_name)
         })
     }
 }
@@ -118,16 +114,8 @@ export function fetchExternalRepo(client, values) {
         dispatch(loadingExternalRepo())
         let defaultExRepo;
         // Get the repository 
-        const repo = client.repo(values)
-        repo.info(function (err, info) {
+        client.repo(values).then(info => {
             // Get all personal repos if any
-            if (err) {
-                dispatch(fetchExternalRepoError(err.message))
-                setTimeout(() => {
-                    dispatch(fetchExternalRepoErrorRemove())
-                }, 5000)
-                return
-            }
             let exRepos = localStorage.getItem('exRepos')
             if (exRepos) {
                 exRepos = JSON.parse(exRepos)
@@ -151,6 +139,11 @@ export function fetchExternalRepo(client, values) {
                 localStorage.setItem('exRepos', JSON.stringify(newRepo))
                 dispatch(fetchExternalRepoSucces(newRepo, defaultExRepo))
             }
+        }).catch(error => {
+            dispatch(fetchExternalRepoError(error.response.data))
+            setTimeout(() => {
+                dispatch(fetchExternalRepoErrorRemove())
+            }, 5000)
         })
     }
 }

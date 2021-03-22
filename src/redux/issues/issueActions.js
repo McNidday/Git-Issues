@@ -23,9 +23,10 @@ function getIssuesFailure(error) {
 export function getIssues(client, config, repo) {
     return function (dispatch) {
         dispatch(getIssuesLoading())
-        client.repo(repo).issues(config, function (err, issues) {
-            if (err) return dispatch(getIssuesFailure(err.message))
+        client.issues(repo, config).then(issues => {
             dispatch(getIssuesSuccess(issues, config.state, repo))
+        }).catch(err => {
+            dispatch(getIssuesFailure(err.response.data))
         })
     }
 }
@@ -142,11 +143,10 @@ function searchForIssuesSuccess(issues) {
 export function searchForIssues(client, q) {
     return function (dispatch) {
         dispatch(getIssuesLoading())
-        client.search().issues({
-            q: q
-        }, function (err, issues) {
-            if (err) return dispatch(searchForIssuesFailure(err.message))
+        client.search(q).then(issues => {
             dispatch(searchForIssuesSuccess(issues.items))
+        }).catch(error => {
+            dispatch(searchForIssuesFailure(error.response.data))
         })
     }
 }
@@ -242,19 +242,17 @@ export function toggleIssuesPage(client, config, repo, q, page) {
     return function (dispatch) {
         if (q) {
             dispatch(getIssuesLoading())
-            client.search().issues({
-                q: q,
-                page: page,
-                per_page: 20
-            }, function (err, issues) {
-                if (err) return dispatch(searchForIssuesFailure(err.message))
+            client.search(q, page).then(issues => {
                 dispatch(toggleSearchIssuesSuccess(issues.items, page))
+            }).catch(error => {
+                dispatch(searchForIssuesFailure(error.response.data.message))
             })
         } else if (config) {
             dispatch(getIssuesLoading())
-            client.repo(repo).issues(config, function (err, issues) {
-                if (err) return dispatch(getIssuesFailure(err.message))
+            client.issues(repo, config, page).then(issues => {
                 dispatch(toggleIssuesSuccess(issues, config.state, repo, page))
+            }).catch(error => {
+                dispatch(getIssuesFailure(error.response.data.message))
             })
         }
     }

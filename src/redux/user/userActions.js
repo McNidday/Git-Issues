@@ -16,13 +16,11 @@ function getUserInfoFailure(error) {
 
 export function getUserInfo(client) {
     return function (dispatch) {
-        client.me().info(function (err, user) {
-            if (err) {
-                dispatch(getUserInfoFailure(err.message))
-                return
-            }
-            dispatch(getUserInfoSuccess(user))
-        })
+        client.info()
+            .then(user => dispatch(getUserInfoSuccess(user)))
+            .catch(err => {
+                dispatch(getUserInfoFailure(err.response.data.message))
+            })
     }
 }
 
