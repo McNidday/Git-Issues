@@ -63,5 +63,5 @@
     "react-devtools": "^4.10.1",
     "rimraf": "^3.0.2"
   },
-  "proxy": "https://mkniddaygitissuesbackend.herokuapp.com/"
+  "proxy": "https://mkniddaygitissuesbackend.herokuapp.com"
 }
