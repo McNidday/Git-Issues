@@ -1,0 +1,54 @@
+.signinContainer {
+    width: 340px;
+    height: fit-content;
+    margin-top: 25%;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 5px;
+
+    .signinInfo {
+        text-align: center;
+        margin: 10px;
+        background-color: rgb(160, 160, 160);
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    .linksContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 10px;
+        padding: 5px;
+
+        a {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid black;
+            text-decoration: none;
+            color: black;
+
+            img {
+                margin-left: 5px;
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        p {
+            margin: 0;
+        }
+    }
+
+    .logo {
+        width: 100%;
+
+        img {
+            width: 100%;
+        }
+    }
+}

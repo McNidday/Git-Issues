@@ -1,0 +1,1 @@
+.issues{position:relative;width:100%;height:100%;display:grid;grid-template-columns:280px auto;grid-template-rows:80px auto;grid-template-areas:"navigationSide navigationTop" "navigationSide mainContent"}@media only screen and (max-width:600px){.issues{grid-template-columns:auto;grid-template-rows:80px auto;grid-template-areas:"navigationTop" "mainContent"}}

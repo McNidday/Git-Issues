@@ -1,0 +1,195 @@
+.topNavContainer {
+    background-color: black;
+    grid-area: navigationTop;
+
+    ul {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        list-style: none;
+        margin: 0;
+        height: 100%;
+
+        li:first-of-type {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            flex-direction: row;
+            color: white !important;
+            font-size: small;
+
+            div {
+                span {
+                    color: white;
+                    display: flex;
+                    flex-direction: column;
+                    font-size: small;
+                }
+
+                &:last-of-type {
+                    opacity: 0;
+                    position: absolute;
+                }
+
+                @media only screen and (max-width: 600px) {
+                    &:last-of-type {
+                        opacity: 1;
+                        position: relative;
+                    }
+
+                    &:nth-child(2) {
+                        opacity: 0;
+                        position: absolute;
+                    }
+
+                    &:nth-child(1) {
+                        opacity: 0;
+                        position: absolute;
+
+                        span {
+                            color: white;
+                        }
+                    }
+                }
+            }
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+            height: 100%;
+        }
+
+        li:first-of-type {
+            width: 80%;
+        }
+
+        li:last-of-type {
+            width: 100px;
+            position: relative;
+
+            input {
+                &:checked {
+                    &+label {
+                        span {
+                            transform: rotateZ(0deg);
+                        }
+                    }
+
+                    &+label+div {
+                        pointer-events: all;
+                        opacity: 1;
+                    }
+                }
+            }
+
+            div:last-of-type {
+                position: absolute;
+                color: black;
+                top: 110%;
+                right: 10%;
+                border-radius: 5px;
+                border: 1px solid black;
+                padding: 2px;
+                pointer-events: none;
+                opacity: 0;
+
+                ul {
+                    list-style: none;
+                    display: flex;
+                    justify-content: space-between;
+                    flex-direction: column;
+                    padding: 0px;
+                    background-color: black;
+
+                    li {
+                        padding: 10px;
+                    }
+
+                    li:first-of-type {
+                        a {
+                            color: white;
+                            text-decoration: none;
+
+                            &:hover {
+                                color: rgb(255, 0, 0);
+                            }
+                        }
+                    }
+
+                    li:nth-child(2) {
+                        width: 100%;
+                        height: 1px;
+                        background-color: white;
+                        padding: 3px;
+                    }
+
+                    li:last-of-type {
+                        span {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            color: white;
+                        }
+
+                        span:first-of-type {
+                            display: block;
+                            width: 20px;
+                            height: 20px;
+                            background-image: url('../cssIcons/power-off.svg');
+                            background-position: center;
+                            background-repeat: no-repeat;
+                            background-size: cover;
+                        }
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+
+            input {
+                position: absolute;
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            label {
+                box-sizing: border-box;
+                padding: 5px;
+                height: 100%;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-direction: row;
+
+                img {
+                    width: 50px;
+                    height: 50px;
+                    border: 2px solid white;
+                    border-radius: 50%;
+                }
+
+                span {
+                    width: 20px;
+                    height: 20px;
+                    display: block;
+                    background-image: url('../cssIcons/toggle-arrow.png');
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    transform: rotateZ(180deg);
+                }
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

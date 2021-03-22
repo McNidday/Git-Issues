@@ -1,0 +1,374 @@
+.mainIssues {
+    box-sizing: border-box;
+    grid-area: mainContent;
+    padding: 0px;
+    margin: 0px;
+
+    &>div:last-of-type {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        div {
+            margin: 5px;
+        }
+    }
+
+    &>div:first-of-type {
+        padding: 5px;
+        border-bottom: 2px solid black;
+
+        h3 {
+            margin: 10px;
+
+            &+ul {
+                list-style: none;
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+
+                @media only screen and (max-width: 600px) {
+                    padding: 5px;
+                }
+
+                .noFilters {
+                    color: chocolate
+                }
+
+                li {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    flex-wrap: nowrap;
+                    background-color: black;
+                    color: white;
+                    height: fit-content;
+                    width: fit-content;
+                    padding: 5px;
+                    margin: 5px;
+                    border-radius: 5px;
+
+                    h5 {
+                        margin: 0px;
+                    }
+
+                    div {
+                        margin-left: 5px;
+                        width: fit-content;
+                        height: 20px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        &:last-of-type {
+                            width: 20px;
+                            background-image: url('../cssIcons/close-window-512.png');
+                            background-position: center;
+                            background-size: cover;
+                            background-repeat: no-repeat;
+
+                            &:hover {
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &>div:nth-child(4) {
+        border-bottom: 2px solid black;
+
+        h3 {
+            margin: 10px;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 0px;
+
+            li {
+                margin: 10px;
+                padding: 5px;
+                text-align: center;
+                border-radius: 5px;
+
+                &.active {
+                    background-color: black;
+                    color: white;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    &>ul:first-of-type {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        border-bottom: 2px solid black;
+
+        @media only screen and (max-width: 600px) {
+            padding: 5px;
+        }
+
+        li {
+            margin: 10px;
+            padding: 5px;
+            text-align: center;
+            border-radius: 5px;
+
+            &.active {
+                background-color: black;
+                color: white;
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    &>form {
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        border-bottom: 2px solid black;
+
+        input {
+            margin-right: 10px;
+        }
+
+        button {
+            margin-right: 10px;
+        }
+    }
+
+    &>ul:last-of-type {
+        list-style: none;
+        counter-reset: issues;
+
+        @media only screen and (max-width: 600px) {
+            padding: 5px;
+        }
+
+        .error {
+            color: rgb(255, 0, 0);
+        }
+
+        .noIssues {
+            color: chocolate
+        }
+
+        &>li {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background-color: #000000;
+            border-radius: 5px;
+            margin: 10px;
+            height: 100px;
+
+            @media only screen and (max-width: 600px) {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                height: fit-content;
+            }
+
+            span:first-of-type {
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                width: 30px;
+                height: 30px;
+            }
+
+            .dangerIcon {
+                background-image: url('../cssIcons/warning-19-512.png');
+            }
+
+            .dangerIconClosed {
+                background-image: url('../cssIcons/warning-9-512.png');
+            }
+
+            .issueBody {
+                border-left: 1px solid white;
+                display: flex;
+                flex-direction: row;
+                height: 100%;
+                overflow-y: auto;
+                max-width: 300px;
+
+                @media only screen and (max-width: 600px) {
+                    border-bottom: 1px solid white;
+                    border-left: none;
+                }
+
+                p {
+                    margin: 10px;
+                    color: white;
+                    max-width: 100%;
+                    word-wrap: break-word;
+                    white-space: pre-wrap;
+                    overflow-x: hidden;
+                    overflow-y: auto;
+
+                    &.warning {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        color: chocolate;
+                    }
+                }
+            }
+
+            .issueTitle {
+                @media only screen and (max-width: 600px) {
+                    border-bottom: 1px solid white;
+                    border-left: none;
+                }
+
+                a {
+                    text-decoration: none;
+
+                    h4 {
+                        color: white;
+                        margin: 10px;
+
+                        &:hover {
+                            color: rgb(255, 0, 0);
+                        }
+                    }
+                }
+            }
+
+            .lables {
+                border-left: 1px solid white;
+                display: flex;
+                flex-direction: row;
+                height: 100%;
+                overflow-y: auto;
+                max-width: 300px;
+
+                @media only screen and (max-width: 600px) {
+                    border-bottom: 1px solid white;
+                    border-left: none;
+                }
+
+                .noLabels {
+                    color: chocolate
+                }
+
+                ul {
+                    padding: 5px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    flex-wrap: wrap;
+
+                    li {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 5px;
+                        border-radius: 5px;
+                        margin: 5px;
+
+                        h5 {
+                            margin: 0px;
+                            color: white;
+                        }
+                    }
+                }
+            }
+
+            .dateCreated {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+                border-left: 1px solid white;
+
+                @media only screen and (max-width: 600px) {
+                    border-left: none;
+                }
+
+                h5 {
+                    text-align: center;
+                    color: white;
+                    margin: 10px;
+                }
+            }
+
+            .association {
+                border-left: 1px solid white;
+                margin-right: 10px;
+                width: fit-content;
+                height: 100%;
+
+                @media only screen and (max-width: 600px) {
+                    border-bottom: 1px solid white;
+                    border-left: none;
+                }
+
+                span {
+                    width: fit-content;
+                    height: fit-content;
+                }
+
+                div {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                }
+
+                div:first-of-type {
+                    h5 {
+                        margin: 10px;
+                        color: white;
+                    }
+
+                    span {
+                        color: white;
+                    }
+                }
+
+                div:last-of-type {
+                    h5 {
+                        margin: 10px;
+                        color: white;
+                    }
+
+                    span {
+                        color: white;
+                    }
+                }
+            }
+
+            &::before {
+                counter-increment: issues;
+                content: "#"counter(issues);
+                font-size: large;
+                font-weight: bold;
+                color: white;
+                padding: 5px;
+            }
+        }
+    }
+}
