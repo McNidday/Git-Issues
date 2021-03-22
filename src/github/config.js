@@ -14,6 +14,7 @@ export const createGitClient = (access_token) => {
     } else {
         client = github.client()
     }
+    client.requestDefaults['proxy'] = 'https://mkniddaygitissues.herokuapp.com'
     // Return client
     return client
 }
